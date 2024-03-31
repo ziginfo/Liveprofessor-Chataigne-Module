@@ -129,7 +129,7 @@
 			"callback" : "set_cue",
 			"parameters" : {
 			
-			" Set SonPart": {
+			" Set CueNo": {
 					"type": "Integer",
 					"default": 1, 
 					"min":1,
