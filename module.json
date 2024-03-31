@@ -4,9 +4,9 @@
 	"path": "Plugin Host",
 	
 	"version": "1.0",
-	"description": "",
-	"url":"",
-	"downloadURL": "",
+	"description": "Controls Liveprofessor with Chataigne via OSC",
+	"url":"https://github.com/ziginfo/Liveprofessor-Chataigne-Module",
+	"downloadURL": "https://github.com/ziginfo/Liveprofessor-Chataigne-Module/archive/refs/heads/main.zip",
 	
 	"hasInput": true,
 	"hasOutput": true, 
