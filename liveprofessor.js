@@ -180,37 +180,93 @@ function stop_cues() {
 
 /// =========== Chain Control =============
 
-function recall_rack(val) {
-	val = val-1 ;
-	local.send("/GigPerformer/SwitchToRack", val);
+function add_chain() {
+	local.send("/Command/Chains/AddNewChain");
 }
 
-function recall_rackspace(val) {
-	val = val-1 ;
-	local.send("/GigPerformer/SwitchToRackSpace", val);
+function prev_chain() {
+	local.send("/Command/PluginWindows/SelectPreviousChain");
 }
 
-function prev_space() {
-	local.send("/GigPerformer/PrevRackSpace");
+function next_chain() {
+	local.send("/Command/PluginWindows/SelectNextChain");
 }
 
-function next_space() {
-	local.send("/GigPerformer/NextRackSpace");
+function prev_plug() {
+	local.send("/Command/PluginWindows/SelectPreviousPlugin");
 }
 
-function prev_variation() {
-	local.send("/RackSpace/PrevVariation");
-}
-
-function next_variation() {
-	local.send("/RackSpace/NextVariation");
+function next_plug() {
+	local.send("/Command/PluginWindows/SelectNextPlugin");
 }
 
 function move_up() {
 	local.send("/GigPerformer/MoveUp");
 }
 
-
 function move_down() {
 	local.send("/GigPerformer/MoveDown");
 }
+
+/// =========== View Control =============
+
+function recall_view(val) {
+	local.send("/Command/ViewSets/RecallViewSet"+val);
+}
+
+function routing_view() {
+	local.send("/Command/View/PluginAudioRouting");
+}
+
+function wiring_view() {
+	local.send("/Command/ViewModes/WireView");
+}
+
+function navi_view() {
+	local.send("/Command/View/Navigator");
+}
+
+function chains_view() {
+	local.send("/Command/ViewModes/Chains");
+}
+
+function main_view(val) {
+	local.send("/Command/ViewModes/"+val);
+}
+
+function plug_manager() {
+	local.send("/Command/Options/PluginManager");
+}
+
+function fullscreen() {
+	local.send("/Command/View/FullScreen");
+}
+
+/// =========== Main Actions =============
+
+function save() {
+	local.send("/Command/Project/SaveProject");
+}
+
+function save_as() {
+	local.send("/Command/Project/SaveAs");
+}
+
+function close() {
+	local.send("/Command/Project/CloseProject");
+}
+
+function open() {
+	local.send("/Command/Project/Open");
+}
+
+function quit() {
+	local.send("/Command/Application/Quit");
+}
+
+function recall_workspace(val) {
+	local.send("/Command/Workspaces/RecallWorkspace"+val);
+}
+
+
+

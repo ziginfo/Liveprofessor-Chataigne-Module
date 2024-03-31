@@ -137,20 +137,135 @@
 					"useForMapping": true }
 		}  },
 				
-	"Stopp All Cues" : {
+	"Stop All Cues" : {
 			"menu" : "Cues",
 			"callback" : "stop_cues"
-		}
+		},
+			
+	"Add New Chain" : {
+			"menu" : "Chain Control",
+			"callback" : "add_chain",
+		 },
 		
 		
+	"Prev Chain" : {
+			"menu" : "Chain Control",
+			"callback" : "prev_chain"
+		},	
+		
+	"Next Chain" : {
+			"menu" : "Chain Control",
+			"callback" : "next_chain"
+		},
+		
+	"Prev Plug-in" : {
+			"menu" : "Chain Control",
+			"callback" : "prev_plug"
+		},	
+		
+	"Next Plug-in" : {
+			"menu" : "Chain Control",
+			"callback" : "next_plug"
+		},
+		
+	"Move Up" : {
+			"menu" : "Chain Control",
+			"callback" : "move_up"
+		},
+		
+	"Move Down" : {
+			"menu" : "Chain Control",
+			"callback" : "move_down"
+		},
+		
+	"Recall View" : {
+			"menu" : "Views",
+			"callback" : "recall_view",
+			"parameters" : {
+			
+			" Recall View No": {
+					"type": "Integer",
+					"default":1, 
+					"min":1,
+					"max":10,
+					"useForMapping": true } }  
+		},
+		
+	"Main View" : {
+			"menu" : "Views",
+			"callback" : "main_view",
+			"parameters" : {
+					
+			"Select a View": {
+					"type": "Enum",
+					"options" : {
+						"Chains" : "Chains",
+						"Active Cuelist" :"LiveCueList",
+						"Audio Patch" :"PatchView",
+						"Wired" : "WireView" } } } 
+		},
+		
+	"Show Chains View" : {
+			"menu" : "Views",
+			"callback" : "chains_view"
+		},
+		
+	"Show Navigator" : {
+			"menu" : "Views",
+			"callback" : "navi_view"
+		},
+		
+	"Plugin Manager" : {
+			"menu" : "Views",
+			"callback" : "plug_manager"
+		},
 
-
-
-
+	"Full Screen" : {
+			"menu" : "Views",
+			"callback" : "fullscreen"
+		},					
+		
+	"Save" : {
+			"menu" : "Main Actions",
+			"callback" : "save"
+		},	
+		
+	"Save as.." : {
+			"menu" : "Main Actions",
+			"callback" : "save_as"
+		},
+		
+	"Close Project" : {
+			"menu" : "Main Actions",
+			"callback" : "close"
+		},
+	"Open" : {
+			"menu" : "Main Actions",
+			"callback" : "open"
+		},	
+		
+	"Quit" : {
+			"menu" : "Main Actions",
+			"callback" : "quit"
+		},
+		
+	"Recall Workspace" : {
+			"menu" : "Main Actions",
+			"callback" : "recall_workspace",
+			"parameters" : {
+			
+			" Recall Workspace": {
+					"type": "Integer",
+					"default":1, 
+					"min":1,
+					"max":10,
+					"useForMapping": true }
+		}  },
 
 		
 	
-
+		
+	
 		
 	}
 }
