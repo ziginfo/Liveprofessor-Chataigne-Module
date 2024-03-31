@@ -28,7 +28,7 @@
 	"defaults": {
 	
 		"OSC Input": {
-			"localPort" : 8001, },
+			"localPort" : 8001 },
 			
 		"OSC Outputs": {
 			"OSC Output": {
@@ -55,7 +55,7 @@
 		{ "type": "Integer",
 			"description":"Set Number of Chains",
 			"default":12 ,
-			"min": 12 },
+			"min": 12 }
 			
 			
 			},
