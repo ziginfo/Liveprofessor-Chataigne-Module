@@ -1,4 +1,4 @@
-## Audioström's Liveprofessor control with chataigne by OSC
+## Audioström's Liveprofessor control with chataigne and OSC
 Default ports are set to  8000 (OUT) and 8001 (IN). But this can be changed in the preferences of Liveprofessor!
 
 To "install" the module, just download the zipped file, than "unzip" the file and put the whole Folder in the "Chataigne modules" directory. You than will find the module in the Community-Modules in Chataigne (under "Plugin-Host")
