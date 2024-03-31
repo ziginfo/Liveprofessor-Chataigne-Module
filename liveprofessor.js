@@ -29,9 +29,9 @@ nextCue = local.values.addStringParameter("Next Cue", "Next Cue","Next Cue");
 // Chain Faders Container>>>>>>>>>>>>>>>>>>>>>
 		
 		faders = local.values.addContainer("Chain Gains");
-		faders.setCollapsed(true);	
-		faders.addTrigger("Reset Values", "Reset All Values" , false);
-		faders.addTrigger("Sync Gains", "Get Fader Values from Liveprofessor" , false);	
+		faders.setCollapsed(true);
+		faders.addTrigger("Sync Gains", "Get Fader Values from Liveprofessor" , false);		
+		faders.addTrigger("Reset Values", "Reset All Values" , false);		
 		for (var n = 1; n <= chaincount; n++) {
 			var fade = faders.addFloatParameter("Chain "+n+" In", "", 0, 0, 1);
 			fade.setAttribute("readonly" ,true);
@@ -50,7 +50,7 @@ function moduleParameterChanged(param) {
 }
 
 // =====================================================================
-// 			VALUE CHANGES
+// 			VALUE CHANGES -> RESET etc...
 // =====================================================================
 
 function moduleValueChanged(value) {
@@ -65,6 +65,15 @@ function moduleValueChanged(value) {
   	for (var n = 0; n < snapcount; n++) {
 	var no = n+1 ;
 	local.values.snapshotLabels.getChild('Snapshot'+no).set(""); 
+	} }
+	
+	if (value.name == "resetValues"){ 
+  	for (var n = 0; n < chaincount; n++) {
+	var no = n+1 ;
+	var child = "chain"+no+"IN" ;
+	local.values.chainGains.getChild(child).set(0);
+	var child = "chain"+no+"OUT" ;
+	local.values.chainGains.getChild(child).set(0); 
 	} }
     
   
@@ -94,7 +103,25 @@ function oscEvent(address, args) {
 	if (snap == n) 
 	{local.values.snapshotLabels.getChild('Snapshot'+no).set(args[0]);} 
 	} }
-
+	
+// >>> insert Gain Values	
+	for (var n = 0; n < chaincount; n++) {
+	var no = n+1 ;
+	var fadno = n*2+1 ;
+	var addr = "/1/fader"+fadno ;
+	if (address == addr) {
+	var child = "chain"+no+"IN" ;
+	local.values.chainGains.getChild(child).set(args[0]);} }
+	
+	for (var n = 0; n < chaincount; n++) {
+	var no = n+1 ;
+	var fadno = n*2+2 ;
+	var addr = "/1/fader"+fadno ;
+	if (address == addr) {
+	var child = "chain"+no+"OUT" ;
+	local.values.chainGains.getChild(child).set(args[0]);} }
+	 
+	
 }
 // =====================================================================
 // 			GENEREIC FUNCTIONS
@@ -147,8 +174,8 @@ function next_cue() {
 	local.send("/Command/CueLists/FireNextCue");
 }
 
-function clear_songpart() {
-	local.send("/SongPart/ClearSnapshot");
+function stop_cues() {
+	local.send("/Command/CueLists/StopAllCues");
 }
 
 /// =========== Chain Control =============
