@@ -1,7 +1,7 @@
 ## Audioström's LiveProfessor control with chataigne and OSC
 Default ports are set to  8000 (OUT) and 8001 (IN). But this can be changed in the preferences of LiveProfessor!
 
-To "install" the module, just download the zipped file, than "unzip" the file and put the whole Folder in the "Chataigne modules" directory. You than will find the module in the Community-Modules in Chataigne (under "Plugin-Host")
+To install the module, just download the zipped file, than "unzip" the file and put the whole Folder in the "Chataigne modules" directory. You than will find the module in the Community-Modules in Chataigne (under "Plugin-Host")
 
 ### Actually  in Version 1.3 
 You can change the number of the "Snapshot-Name-Fields" and also the number of shown  "Chains" ! If you change the number you must save the project (cmd-S) and reload it (cmd-shift-O).    
