@@ -3,7 +3,7 @@
 	"type": "OSC",
 	"path": "Plugin Host",
 	
-	"version": "1.2.5",
+	"version": "1.3",
 	"description": "Controls LiveProfessor with Chataigne via OSC",
 	"url":"https://github.com/ziginfo/Liveprofessor-Chataigne-Module",
 	"downloadURL": "https://github.com/ziginfo/Liveprofessor-Chataigne-Module/archive/refs/heads/main.zip",
@@ -37,23 +37,20 @@
 				"listenToFeedback":false } }
 	},
 	
-	"parameters": {
-		
-		"Free Spare":{"type":"Integer", "min":0,"max":20}
-	},
+	"parameters": { },
 	
 	"scripts": ["liveprofessor.js"],
 	
 	"values":
   		{ "Number of Snapshots":
 		{ "type": "Integer",
-			"description":"Set Number of Snapshots",
+			"description":"Reload the Project after changing this value !",
 			
 			"min": 8 },
 			
 		 "Number of Chains":
 		{ "type": "Integer",
-			"description":"Set Number of Chains",
+			"description":"Reload the Project after changing this value !",
 			
 			"min": 4 }
 			
@@ -116,7 +113,7 @@
 			"callback" : "cue_down"
 		},
 		
-	"Cuelist Top" : {
+	"Cuelist GoTo Top" : {
 			"menu" : "Cues",
 			"callback" : "cuelist_top"
 		},
@@ -133,7 +130,7 @@
 					"max":100,
 					"useForMapping": true },
 			
-			" Set Cue": {
+			"Set Cue": {
 					"type": "Integer",
 					"default": 1, 
 					"min":1,
@@ -195,6 +192,19 @@
 			"callback" : "move_down"
 		},
 		
+	"Recall Workspace" : {
+			"menu" : "Views",
+			"callback" : "recall_workspace",
+			"parameters" : {
+			
+			" Recall Workspace": {
+					"type": "Integer",
+					"default":1, 
+					"min":1,
+					"max":10,
+					"useForMapping": true }
+		}  },
+		
 	"Recall View" : {
 			"menu" : "Views",
 			"callback" : "recall_view",
@@ -227,20 +237,77 @@
 			"callback" : "chains_view"
 		},
 		
-	"Show Navigator" : {
-			"menu" : "Views",
-			"callback" : "navi_view"
-		},
 		
 	"Plugin Manager" : {
 			"menu" : "Views",
 			"callback" : "plug_manager"
 		},
+		
+	"Keyboard Shortcuts" : {
+			"menu" : "Views",
+			"callback" : "shortcuts"
+		},
+
+	"Program Options" : {
+			"menu" : "Views",
+			"callback" : "program_options"
+		},
+
+	"Project Options" : {
+			"menu" : "Views",
+			"callback" : "project_options"
+		},
 
 	"Full Screen" : {
 			"menu" : "Views",
 			"callback" : "fullscreen"
-		},					
+		},
+		
+		
+	"AudioRouting Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "audio_panel"
+		},
+		
+	"Midi Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "midi_panel"
+		},
+		
+	"PluginSnapshots Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "plugsnap_panel"
+		},
+		
+	"PluginPresets Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "plugpreset_panel"
+		},
+		
+	"Navigator Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "navi_panel"
+		},
+		
+	"GlobalSnapshots Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "snapshots_panel"
+		},	
+		
+	"Cuelists Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "cuelists_panel"
+		},
+		
+	"Transport Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "transport_panel"
+		},
+		
+	"Workspaces Panel" : {
+			"menu" : "Show-Hide",
+			"callback" : "workspace_panel"
+		},									
 		
 	"Save" : {
 			"menu" : "Main Actions",
@@ -250,6 +317,11 @@
 	"Save as.." : {
 			"menu" : "Main Actions",
 			"callback" : "save_as"
+		},
+		
+		"Rename Project" : {
+			"menu" : "Main Actions",
+			"callback" : "rename_project"
 		},
 		
 	"Close Project" : {
@@ -266,18 +338,7 @@
 			"callback" : "quit"
 		},
 		
-	"Recall Workspace" : {
-			"menu" : "Main Actions",
-			"callback" : "recall_workspace",
-			"parameters" : {
-			
-			" Recall Workspace": {
-					"type": "Integer",
-					"default":1, 
-					"min":1,
-					"max":10,
-					"useForMapping": true }
-		}  },
+	
 
 		
 	

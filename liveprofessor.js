@@ -13,9 +13,11 @@ function init() {
 // 			CREATE CONTAINERS
 // =====================================================================
 
-Snap = local.values.addStringParameter("Active Snapshot", "Active Snapshot","Active Snapshot");
-activeCue = local.values.addStringParameter("Active Cue", "Active Cue","Active Cue");
-nextCue = local.values.addStringParameter("Next Cue", "Next Cue","Next Cue");
+Snap = local.values.addStringParameter("Active Snapshot", "Shows Active Snapshot Name","Recall Snapshot First");
+activeCue = local.values.addStringParameter("Active Cue", "Shows Active Cue Name","Active Cue");
+nextCue = local.values.addStringParameter("Next Cue", "Shows Next Cue Name","Next Cue");
+cpu = local.values.addFloatParameter("CPU Load", "Shows the actual CPU-Load in %", 0, 0, 100);
+		cpu.setAttribute("readonly" ,true);
 
 
 //Snaphot Labels Container >>>>>>>>>>>>>>>>>>>>>>		
@@ -94,6 +96,10 @@ function oscEvent(address, args) {
  	{local.values.activeCue.set(args[0]);}
 	if (address == "/CueLists/NextCue")
  	{local.values.nextCue.set(args[0]);}
+ 	
+ // >>> CPU-Charge
+ 	if (address == "/DSPmeter")
+ 	{local.values.cpuLoad.set(args[0]);}	
 
 // >>> insert Snapshot Labels	
 	for (var n = 0; n < snapcount; n++) {
@@ -121,10 +127,24 @@ function oscEvent(address, args) {
 	var addr = "/1/fader"+fadno ;
 	if (address == addr) {
 	var child = "chain"+no+"OUT" ;
-	local.values.chainGains.getChild(child).set(args[0]);} }
-	 
-	
+	local.values.chainGains.getChild(child).set(args[0]);} }	
 }
+
+//========================================================================
+//					KEEP ALIVE
+//========================================================================
+
+function update(deltaTime) {
+	var now = util.getTime();
+	if(now > TSSendAlive) {
+		TSSendAlive = now + 2;
+		keepAlive(); }
+}
+
+function keepAlive() {
+	local.send("/StatusPoll");
+}
+
 // =====================================================================
 // 			GENEREIC FUNCTIONS
 // =====================================================================
@@ -233,10 +253,6 @@ function wiring_view() {
 	local.send("/Command/ViewModes/WireView");
 }
 
-function navi_view() {
-	local.send("/Command/View/Navigator");
-}
-
 function chains_view() {
 	local.send("/Command/ViewModes/Chains");
 }
@@ -249,8 +265,58 @@ function plug_manager() {
 	local.send("/Command/Options/PluginManager");
 }
 
+function shortcuts() {
+	local.send("/Command/Options/KeyboardShortcuts");
+}
+
+function program_options() {
+	local.send("/Command/Options/ProgramOptions");
+}
+
+function project_options() {
+	local.send("/Command/Options/ProjectOptions");
+}
+
 function fullscreen() {
 	local.send("/Command/View/FullScreen");
+}
+
+/// =========== Show Hide Panels =============
+
+function audio_panel() {
+	local.send("/Command/View/PluginAudioRouting");
+}
+
+function midi_panel() {
+	local.send("/Command/View/PluginMidiPanel");
+}
+
+function plugsnap_panel() {
+	local.send("/Command/View/PluginSnapshotPanel");
+}
+
+function plugpreset_panel() {
+	local.send("/Command/View/PluginPresetList");
+}
+
+function navi_panel() {
+	local.send("/Command/View/Navigator");
+}
+
+function snapshots_panel() {
+	local.send("/Command/View/GlobalSnapshotsPanel");
+}
+
+function cuelists_panel() {
+	local.send("/Command/View/CueListPanel");
+}
+
+function transport_panel() {
+	local.send("/Command/View/TransportPanel");
+}
+
+function workspace_panel() {
+	local.send("/Command/View/WorkspacePanel");
 }
 
 /// =========== Main Actions =============
@@ -261,6 +327,10 @@ function save() {
 
 function save_as() {
 	local.send("/Command/Project/SaveAs");
+}
+
+function rename_project() {
+	local.send("/Command/Project/RenameProject");
 }
 
 function close() {
