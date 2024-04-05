@@ -1,7 +1,7 @@
 // ========================== VARS ===========================
 
-var snapcount = count = local.values.numberOfSnapshots.get() ;
-var chaincount = count = local.values.numberOfChains.get() ;
+var snapcount = local.values.numberOfSnapshots.get() ;
+var chaincount = local.values.numberOfChains.get() ;
 
 //====================================================================
 //			INITIAL FUNCTIONS 
@@ -46,7 +46,8 @@ nextCue = local.values.addStringParameter("Next Cue", "Next Cue","Next Cue");
 // =====================================================================
 
 function moduleParameterChanged(param) {
-  script.log(param.name + " parameter changed, new value: " + param.get());
+  
+  
 }
 
 // =====================================================================
@@ -56,7 +57,8 @@ function moduleParameterChanged(param) {
 function moduleValueChanged(value) {
   
   	if (value.name == "syncGains"){ 
-  	local.send("/GlobalSnapshots/Refresh"); }
+  	local.send("/GlobalSnapshots/Refresh"); 
+  	local.send("/StatusPoll") ;  	}
   	
   	if (value.name == "syncLabels"){ 
   	local.send("/GlobalSnapshots/Refresh"); }
@@ -129,11 +131,6 @@ function oscEvent(address, args) {
 
 /// ===========Snapshots  ==================
 
-function set_setlist(val) {
-	val = val-1 ;
-	local.send("/GigPerformer/SelectSetList", val);
-}
-
 function set_snap(val) {
 	val = val-1 ;
 	local.send("/GlobalSnapshots/Recall", val);
@@ -151,7 +148,15 @@ function update_snap() {
 	local.send("/Command/GlobalSnapshots/UpdateActiveGlobalSnapshot");
 }
 
+function add_snap() {
+	local.send("/Command/GlobalSnapshots/AddNewGlobalSnapshot");
+}
+
 /// ===========Cues  ==================
+
+function cuelist_top() {
+	local.send("/Command/CueLists/GoToTop");
+}
 
 function cue_down() {
 	local.send("/Command/CueLists/StepDown");
@@ -161,8 +166,14 @@ function cue_up() {
 	local.send("/Command/CueLists/StepUp");
 }
 
-function recall_cue(val) {
-	val = val-1 ;
+function set_listcue(list, cue) {
+//	val = val-1 ;
+	
+	local.send("/Cue/Recall", [list , cue]);
+}
+
+function set_cue(val) {
+//	val = val-1 ;
 	local.send("/Cue/Recall", val);
 }
 

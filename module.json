@@ -1,10 +1,10 @@
 {
-	"name": "Liveprofessor",
+	"name": "LiveProfessor",
 	"type": "OSC",
 	"path": "Plugin Host",
 	
-	"version": "1.1",
-	"description": "Controls Liveprofessor with Chataigne via OSC",
+	"version": "1.2.5",
+	"description": "Controls LiveProfessor with Chataigne via OSC",
 	"url":"https://github.com/ziginfo/Liveprofessor-Chataigne-Module",
 	"downloadURL": "https://github.com/ziginfo/Liveprofessor-Chataigne-Module/archive/refs/heads/main.zip",
 	
@@ -39,7 +39,7 @@
 	
 	"parameters": {
 		
-		"Fee Spare":{"type":"Integer", "min":0,"max":20}
+		"Free Spare":{"type":"Integer", "min":0,"max":20}
 	},
 	
 	"scripts": ["liveprofessor.js"],
@@ -48,33 +48,19 @@
   		{ "Number of Snapshots":
 		{ "type": "Integer",
 			"description":"Set Number of Snapshots",
-			"default":12 ,
-			"min": 12 },
+			
+			"min": 8 },
 			
 		 "Number of Chains":
 		{ "type": "Integer",
 			"description":"Set Number of Chains",
-			"default":12 ,
-			"min": 12 }
+			
+			"min": 4 }
 			
 			
 			},
 	
 	"commands": {
-	
-	
-	"Select SetList" : {
-			"menu" : "Snapshots",
-			"callback" : "set_setlist",
-			"parameters" : {
-			
-			" Set Song N°": {
-					"type": "Integer",
-					"default": 1, 
-					"min":1,
-					"max":20,
-					"useForMapping": true }
-		}  },
 		
 	"Recall Snapshot" : {
 			"menu" : "Snapshots",
@@ -99,10 +85,16 @@
 			"callback" : "next_snap"
 		},
 		
-	"Update Snapshot" : {
+	"Add New Snapshot" : {
+			"menu" : "Snapshots",
+			"callback" : "add_snap"
+		},
+		
+	"Update Active Snapshot" : {
 			"menu" : "Snapshots",
 			"callback" : "update_snap"
 		},
+				
 		
 	"Prev Cue" : {
 			"menu" : "Cues",
@@ -124,12 +116,37 @@
 			"callback" : "cue_down"
 		},
 		
-	"Recall Cue N°" : {
+	"Cuelist Top" : {
+			"menu" : "Cues",
+			"callback" : "cuelist_top"
+		},
+
+	"Recall Cuelist/Cue" : {
+			"menu" : "Cues",
+			"callback" : "set_listcue",
+			"parameters" : {
+			
+			" Set Cuelist": {
+					"type": "Integer",
+					"default": 1, 
+					"min":1,
+					"max":100,
+					"useForMapping": true },
+			
+			" Set Cue": {
+					"type": "Integer",
+					"default": 1, 
+					"min":1,
+					"max":100,
+					"useForMapping": true }
+		}  },
+			
+	"Recall Cue No" : {
 			"menu" : "Cues",
 			"callback" : "set_cue",
 			"parameters" : {
 			
-			" Set SonPart": {
+			" Set Cue No": {
 					"type": "Integer",
 					"default": 1, 
 					"min":1,
